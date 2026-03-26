@@ -11,11 +11,12 @@ from experiment_spec import EXPERIMENTAL_FRAME
 from train_common import (
     build_model,
     count_parameters,
-    ensure_dir,
     evaluate_regression,
     parse_float_list,
     parse_name_list,
+    prepare_output_dirs,
     save_json,
+    save_loss_curve,
     select_device,
     set_seed,
     train_one_epoch,
@@ -80,7 +81,7 @@ def run_training(args):
     _validate_input_paths(args)
     set_seed(args.seed)
     device = select_device(args.device)
-    output_dir = ensure_dir(args.output_dir)
+    output_dir, figures_dir = prepare_output_dirs(args.output_dir, args.model)
     regression_spec = EXPERIMENTAL_FRAME["regression"]
 
     regression_columns = parse_name_list(args.regression_columns)
@@ -168,7 +169,34 @@ def run_training(args):
         "test_metrics": test_metrics,
         "config": vars(args),
     }
+    config = {
+        "model": args.model,
+        "task": "regression",
+        "target_mode": regression_spec["target_column_mode"],
+        "loss": regression_spec["loss"],
+        "selection_metric": regression_spec["selection_metric"],
+        "optimizer": optimizer.__class__.__name__,
+        "lr": args.lr,
+        "weight_decay": args.weight_decay,
+        "batch_size": args.batch_size,
+        "epochs": args.epochs,
+        "image_size": args.image_size,
+        "seed": args.seed,
+        "augment": args.augment,
+        "regression_columns": regression_columns,
+        "weights": weights,
+        "device": str(device),
+    }
+
+    save_json(output_dir / "config.json", config)
     save_json(output_dir / "metrics.json", summary)
+    save_loss_curve(
+        history,
+        figures_dir / "loss_curve.png",
+        train_key="train_loss",
+        val_key="val_loss",
+        title=f"Regression loss ({args.model})",
+    )
 
     print(
         "Test metrics: "

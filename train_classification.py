@@ -12,9 +12,10 @@ from train_common import (
     BinaryHingeLoss,
     build_model,
     count_parameters,
-    ensure_dir,
     evaluate_classification,
+    prepare_output_dirs,
     save_json,
+    save_loss_curve,
     select_device,
     set_seed,
     train_one_epoch,
@@ -74,7 +75,7 @@ def run_training(args):
     _validate_input_paths(args)
     set_seed(args.seed)
     device = select_device(args.device)
-    output_dir = ensure_dir(args.output_dir)
+    output_dir, figures_dir = prepare_output_dirs(args.output_dir, args.model)
     classification_spec = EXPERIMENTAL_FRAME["classification"]
 
     loaders, dataset_sizes = create_dataloaders(
@@ -160,7 +161,34 @@ def run_training(args):
         "test_metrics": test_metrics,
         "config": vars(args),
     }
+    config = {
+        "model": args.model,
+        "task": "classification",
+        "target_column": args.target_column,
+        "label_scheme": classification_spec["label_scheme"],
+        "labels": classification_spec["labels"],
+        "decision_rule": classification_spec["decision_rule"],
+        "loss": classification_spec["loss"],
+        "optimizer": optimizer.__class__.__name__,
+        "lr": args.lr,
+        "weight_decay": args.weight_decay,
+        "batch_size": args.batch_size,
+        "epochs": args.epochs,
+        "image_size": args.image_size,
+        "seed": args.seed,
+        "augment": args.augment,
+        "device": str(device),
+    }
+
+    save_json(output_dir / "config.json", config)
     save_json(output_dir / "metrics.json", summary)
+    save_loss_curve(
+        history,
+        figures_dir / "loss_curve.png",
+        train_key="train_loss",
+        val_key="val_loss",
+        title=f"Classification loss ({args.model})",
+    )
 
     print(
         "Test metrics: "

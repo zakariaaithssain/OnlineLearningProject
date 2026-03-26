@@ -4,6 +4,7 @@ import json
 import random
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from torch import nn
@@ -78,6 +79,30 @@ def ensure_dir(path: str | Path) -> Path:
 
 def save_json(path: str | Path, payload):
     Path(path).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def prepare_output_dirs(base_output_dir: str | Path, model_name: str):
+    run_dir = ensure_dir(Path(base_output_dir) / model_name)
+    figures_dir = ensure_dir(run_dir / "figures")
+    return run_dir, figures_dir
+
+
+def save_loss_curve(history, path: str | Path, train_key: str, val_key: str, title: str):
+    epochs = [item["epoch"] for item in history]
+    train_values = [item[train_key] for item in history]
+    val_values = [item[val_key] for item in history]
+
+    plt.figure(figsize=(7, 4))
+    plt.plot(epochs, train_values, marker="o", label=train_key)
+    plt.plot(epochs, val_values, marker="o", label=val_key)
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title(title)
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close()
 
 
 def train_one_epoch(model, loader, criterion, optimizer, device):
