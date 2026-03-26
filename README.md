@@ -29,6 +29,10 @@ Le document de reference du mini-projet est:
 
 - `mini_projet.pdf`
 
+Guide complementaire utile:
+
+- [training_reuse_guide.md](./training_reuse_guide.md) pour savoir quand reutiliser un entrainement et quand re-entrainer selon TP1 a TP5
+
 ## 2. Objectif pedagogique
 
 Le but n'est pas seulement d'entrainer un modele, mais de relier les concepts
