@@ -1,0 +1,97 @@
+{
+  "task": "regression",
+  "model": "improved",
+  "device": "cpu",
+  "experimental_frame": {
+    "name": "attribute_sum_regression",
+    "description": "Predict the sum of all available CelebA attributes.",
+    "target_column_mode": "all_attributes_sum",
+    "loss": "mse",
+    "selection_metric": "rmse"
+  },
+  "best_epoch": 4,
+  "dataset_sizes": {
+    "train": 10000,
+    "val": 1000,
+    "test": 1000
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 41.3773248046875,
+      "train_mae": 4.097389221191406,
+      "train_rmse": 5.117943907298793,
+      "val_loss": 26.977698333740236,
+      "val_mae": 4.186905860900879,
+      "val_rmse": 5.194006091619951,
+      "val_r2": 0.20647096633911133
+    },
+    {
+      "epoch": 2,
+      "train_loss": 28.141404806518555,
+      "train_mae": 3.6050522327423096,
+      "train_rmse": 4.477851828464254,
+      "val_loss": 20.505032196044922,
+      "val_mae": 3.6707959175109863,
+      "val_rmse": 4.528248180664721,
+      "val_r2": 0.39685970544815063
+    },
+    {
+      "epoch": 3,
+      "train_loss": 22.527096936035157,
+      "train_mae": 3.8457586765289307,
+      "train_rmse": 4.7647790376841295,
+      "val_loss": 23.85123828125,
+      "val_mae": 3.9462084770202637,
+      "val_rmse": 4.883772952414191,
+      "val_r2": 0.29843348264694214
+    },
+    {
+      "epoch": 4,
+      "train_loss": 22.184644808959963,
+      "train_mae": 3.033310890197754,
+      "train_rmse": 3.8072886886619823,
+      "val_loss": 16.448295852661133,
+      "val_mae": 3.234251022338867,
+      "val_rmse": 4.055650071272218,
+      "val_r2": 0.5161855220794678
+    },
+    {
+      "epoch": 5,
+      "train_loss": 20.471519647216798,
+      "train_mae": 3.0733163356781006,
+      "train_rmse": 3.846843931938796,
+      "val_loss": 17.124611679077148,
+      "val_mae": 3.3110220432281494,
+      "val_rmse": 4.138189326369554,
+      "val_r2": 0.49629223346710205
+    }
+  ],
+  "test_metrics": {
+    "loss": 16.205859542846678,
+    "mae": 3.2634589672088623,
+    "mse": 16.205860137939453,
+    "rmse": 4.0256502751654235,
+    "r2": 0.503472626209259
+  },
+  "config": {
+    "image_dir": "data/img_align_celeba_reduced",
+    "attr_file": "data/list_attr_celeba.csv",
+    "partition_file": "data/list_eval_partition_reduced.csv",
+    "regression_columns": null,
+    "weights": null,
+    "model": "improved",
+    "epochs": 5,
+    "batch_size": 32,
+    "image_size": 64,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "val_ratio": 0.15,
+    "test_ratio": 0.15,
+    "augment": false,
+    "output_dir": "outputs/regression"
+  }
+}

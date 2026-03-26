@@ -12,17 +12,14 @@ STATUS_DONE = [
     "Le fichier `utils.py` contient des briques pour TP1 a TP5: covering number, line search, validation croisee, regularisation, metriques, projection, normes et regret.",
     "Le repo dispose maintenant d'un cadre experimental fige pour le dataset, les deux CNN et les deux taches.",
     "La classification est alignee sur le PDF: score brut, labels signes {-1, +1} et perte hinge.",
+    "Training is done for both tasks. "
 ]
 
 STATUS_MISSING = [
-    "Aucun dossier de donnees n'est versionne dans ce repo. L'entrainement ne peut pas tourner sans les CSV et les images CelebA.",
-    "Il manque encore les experiences executees, les courbes, les tableaux comparatifs et la synthese finale TP1-TP5.",
     "La couverture TP2-TP5 existe surtout comme utilitaires de bas niveau, pas encore comme demonstration complete reliee aux CNN dans un rapport ou notebook final.",
 ]
 
 ROADMAP = [
-    "Valider les chemins de donnees et lancer un premier baseline sur la classification binaire avec `CNN1`.",
-    "Lancer ensuite la regression avec `CNN2` et fixer une cible explicite: somme des attributs ou somme ponderee.",
     "Comparer les deux architectures sur les deux taches avec les memes splits, seeds et hyperparametres de base.",
     "Produire les artefacts de rendu: courbes de loss, tableau final train/val/test, interpretation TP1-TP5 et conclusion.",
 ]

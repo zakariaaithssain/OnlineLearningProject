@@ -1,0 +1,107 @@
+{
+  "task": "classification",
+  "model": "simple",
+  "device": "cpu",
+  "experimental_frame": {
+    "name": "smiling_binary_classification",
+    "description": "Predict whether the face is smiling from a raw scalar score.",
+    "target_column": "Smiling",
+    "label_scheme": "signed",
+    "labels": [
+      -1,
+      1
+    ],
+    "decision_rule": "sign(score)",
+    "loss": "hinge",
+    "selection_metric": "f1"
+  },
+  "best_epoch": 4,
+  "dataset_sizes": {
+    "train": 10000,
+    "val": 1000,
+    "test": 1000
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5611010025978088,
+      "train_accuracy": 0.8865,
+      "train_f1": 0.8728006275911183,
+      "val_loss": 0.31586356401443483,
+      "val_accuracy": 0.877,
+      "val_precision": 0.9152941176470566,
+      "val_recall": 0.8172268907563007,
+      "val_f1": 0.8634850166476683
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.25849137498140334,
+      "train_accuracy": 0.9063,
+      "train_f1": 0.9039466940025759,
+      "val_loss": 0.275803983092308,
+      "val_accuracy": 0.885,
+      "val_precision": 0.8504854368932022,
+      "val_recall": 0.9201680672268888,
+      "val_f1": 0.8839556004031316
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.22113856313228608,
+      "train_accuracy": 0.9272,
+      "train_f1": 0.9202104340196667,
+      "val_loss": 0.2420059872865677,
+      "val_accuracy": 0.898,
+      "val_precision": 0.9249999999999978,
+      "val_recall": 0.8550420168067209,
+      "val_f1": 0.8886462882091057
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.19730893902182578,
+      "train_accuracy": 0.9386,
+      "train_f1": 0.9330863121180702,
+      "val_loss": 0.2316323709487915,
+      "val_accuracy": 0.905,
+      "val_precision": 0.9280898876404473,
+      "val_recall": 0.8676470588235276,
+      "val_f1": 0.896851248642278
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1716633025467396,
+      "train_accuracy": 0.934,
+      "train_f1": 0.9264542010246848,
+      "val_loss": 0.25169935649633407,
+      "val_accuracy": 0.897,
+      "val_precision": 0.9451073985680167,
+      "val_recall": 0.831932773109242,
+      "val_f1": 0.8849162011168185
+    }
+  ],
+  "test_metrics": {
+    "loss": 0.24879595327377318,
+    "accuracy": 0.902,
+    "precision": 0.9279069767441839,
+    "recall": 0.8562231759656633,
+    "f1": 0.8906249999994987
+  },
+  "config": {
+    "image_dir": "data/img_align_celeba_reduced",
+    "attr_file": "data/list_attr_celeba.csv",
+    "partition_file": "data/list_eval_partition_reduced.csv",
+    "target_column": "Smiling",
+    "model": "simple",
+    "epochs": 5,
+    "batch_size": 32,
+    "image_size": 64,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "num_workers": 0,
+    "seed": 42,
+    "device": "auto",
+    "val_ratio": 0.15,
+    "test_ratio": 0.15,
+    "augment": false,
+    "output_dir": "outputs/classification"
+  }
+}
