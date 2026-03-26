@@ -1,1 +1,4 @@
 data/
+*.pdf
+__pycache__/
+.venv/

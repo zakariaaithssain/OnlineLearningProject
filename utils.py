@@ -21,7 +21,7 @@ from collections import defaultdict
 # 1. COVERING NUMBER (greedy epsilon-cover)
 # ===========================================================================
 
-def greedy_epsilon_cover(A, epsilon, dist="euclidean"):
+def greedy_epsilon_cover(A, epsilon, dist="euclidean", return_centers=False):
     """
     Algorithme glouton pour approximer le covering number N(A, epsilon).
 
@@ -49,6 +49,8 @@ def greedy_epsilon_cover(A, epsilon, dist="euclidean"):
                      if np.linalg.norm(A[i] - c) > epsilon]
 
     centers = A[centers_idx]
+    if return_centers:
+        return centers, len(centers_idx)
     return len(centers_idx)
 
 
@@ -62,7 +64,7 @@ def covering_number_curve(A, epsilons):
     """
     counts = []
     for eps in epsilons:
-        _, n = greedy_epsilon_cover(A, eps)
+        _, n = greedy_epsilon_cover(A, eps, return_centers=True)
         counts.append(n)
     return counts
 

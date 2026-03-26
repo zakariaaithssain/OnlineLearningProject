@@ -1,7 +1,6 @@
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim as optim
-import torch
 
 
 
@@ -26,6 +25,4 @@ class CNN1(nn.Module):
         x = torch.flatten(x, 1)
         x = F.relu(self.fc1(x))
         x = self.fc_out(x)
-        if self.output_type == 'classification':
-            x = torch.sigmoid(x)
         return x
