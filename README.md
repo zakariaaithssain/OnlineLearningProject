@@ -96,17 +96,3 @@ Avec `uv`:
 uv sync
 ```
 
-
-### Lancer la classification
-
-```bash
-.venv/bin/python train_classification.py
-```
-
-### Lancer la regression
-
-```bash
-.venv/bin/python train_regression.py
-```
-
-
